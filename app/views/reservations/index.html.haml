@@ -1,2 +1,8 @@
-%h1 Reservations#index
-%p Find me in app/views/reservations/index.html.haml
+%h1 Choose a day to make your reservation
+
+= month_calendar do |date|
+  = date.day
+  - if date > DateTime.now
+    .text-center
+      %small This day has available slots!
+      = link_to "Reserve", reservations_new_path, "class"=>"btn btn-primary btn-sm"
