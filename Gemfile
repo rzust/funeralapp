@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Sidekiq and Cache in production
 gem 'redis', '~> 4.0'
 
+# Use responders for respond_to
+gem "responders"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # Use simple calendar for calendar rendering

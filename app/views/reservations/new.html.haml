@@ -1,2 +1,15 @@
-%h1 Reservations#new
-%p Find me in app/views/reservations/new.html.haml
+
+%h1 New Reservation
+
+= form_for(Reservation.new) do |f|
+  %h3 Available Slots
+  - (8..20).step(2) do |slot|
+    - unless @reservations.include?(slot)
+      .form-check
+        = f.radio_button :starting_time, @selected_day.change({ hour: slot, min: 0, sec: 0 })
+        = f.label :starting_time, "#{slot}:00", value: slot
+
+  = link_to "Cancel", reservations_path, {"class" => "btn btn-danger btn-sm"}
+  = f.submit "Save", {"class" => "btn btn-primary btn-sm"}
+
+

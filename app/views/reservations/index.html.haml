@@ -5,4 +5,4 @@
   - if date > DateTime.now
     .text-center
       %small This day has available slots!
-      = link_to "Reserve", reservations_new_path, "class"=>"btn btn-primary btn-sm"
+      = link_to "Reserve", new_reservation_path(selected_day: date), "class"=>"btn btn-primary btn-sm btn-block"

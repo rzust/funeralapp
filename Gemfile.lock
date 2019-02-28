@@ -275,6 +275,7 @@ DEPENDENCIES
   rails (~> 5.2.2)
   rb-readline
   redis (~> 4.0)
+  responders
   sass-rails (~> 5.0)
   selenium-webdriver
   simple_calendar (~> 2.0)
