@@ -29,6 +29,12 @@ gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Http Caching
+gem 'faraday-http-cache'
+
+# Faraday Middleware
+gem 'faraday_middleware'
+
 # Use Devise for authentication
 gem 'devise'
 
@@ -44,6 +50,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Fix readline lib not found
+  gem 'rb-readline'
 end
 
 group :development do
