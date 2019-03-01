@@ -5,4 +5,5 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable
 
   validates :email, presence: true, uniqueness: true
+  has_many :reservations
 end

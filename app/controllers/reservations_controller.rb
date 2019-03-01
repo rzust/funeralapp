@@ -10,7 +10,7 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    reservation    = Reservation.new(reservation_params)
+    reservation    = current_customer.reservations.build(reservation_params)
     reservation.end_time = reservation.starting_time + 2.hours
     flash[:notice] = "Reservation successfully created!" if reservation.save
     redirect_to action: "index"
@@ -19,7 +19,7 @@ class ReservationsController < ApplicationController
 private
   def set_reservations
     start_date = params[:start_date].present? ? DateTime.parse(params[:start_date]) : DateTime.now
-    @reservations = Reservation.where(starting_time: start_date.beginning_of_day..(start_date+34.days).end_of_day)
+    @reservations = Reservation.where(starting_time: (start_date.beginning_of_month - 6.days)..(start_date.end_of_month + 7.days).end_of_day)
   end
 
   def reservation_params
