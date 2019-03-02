@@ -2,16 +2,21 @@
 
 = month_calendar events: @reservations do |date, reservations|
   %span.badge.badge-secondary= date.day
-  .text-center
-    - if date > DateTime.now && reservations.count < 7
-      %small= "This day has #{7 - reservations.count} slots available!"
-      = link_to "Reserve", new_reservation_path(selected_day: date), "class"=>"btn btn-info btn-sm btn-block"
-    - else
-      %span.badge.badge-light This day is not available
+  - unless five_day_forecast.dig(date.to_datetime.to_i, :temp).blank?
+    %span.badge.badge-primary
+      = five_day_forecast.dig(date.to_datetime.to_i, :weather)
+      = "~#{five_day_forecast.dig(date.to_datetime.to_i, :temp)}C°"
 
+  .text-center
     - reservations.each do |x|
       - if current_customer == x.customer
         %span.badge.badge-success
           = "Your reservation is from"
           %br
-          = "#{x.start_time.strftime('%H:00')} to #{x.end_time.strftime('%H:00')}"
+            = "#{x.start_time.strftime('%H:00')} to #{x.end_time.strftime('%H:00')}"
+
+    - if date > DateTime.now && reservations.count < 7
+      %small= "This day has #{7 - reservations.count} slots available!"
+      = link_to "Reserve", new_reservation_path(selected_day: date), "class"=>"btn btn-info btn-sm btn-block"
+    - else
+      %span.badge.badge-light This day is not available

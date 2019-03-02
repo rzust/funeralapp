@@ -1,15 +1,21 @@
 
-%h1 New Reservation
+.container.jumbotron
+  %h1= "New Reservation for #{@selected_day.strftime("%d of %b, %Y")}"
+  - unless five_day_forecast.dig(@selected_day.to_i, :temp).blank?
+    %span.badge.badge-primary
+      Forecast for this day:
+      = five_day_forecast.dig(@selected_day.to_i, :weather)
+      = "~#{five_day_forecast.dig(@selected_day.to_i, :temp)}C°"
 
-= form_for(Reservation.new) do |f|
-  %h3 Available Slots
-  - (8..20).step(2) do |slot|
-    - unless @taken_slots.include?(slot)
-      .form-check
-        = f.radio_button :starting_time, @selected_day.change({ hour: slot, min: 0, sec: 0 }), required: true
-        = f.label :starting_time, "#{slot}:00", value: slot
+  = form_for(Reservation.new) do |f|
+    %h3 Available Slots
+    - (8..20).step(2) do |slot|
+      - unless @taken_slots.include?(slot)
+        .form-check
+          = f.radio_button :starting_time, @selected_day.change({ hour: slot, min: 0, sec: 0 }), required: true
+          = f.label :starting_time, "#{slot}:00", value: @selected_day.change({ hour: slot, min: 0, sec: 0 })
 
-  = link_to "Cancel", reservations_path, {"class" => "btn btn-danger btn-sm"}
-  = f.submit "Save", {"class" => "btn btn-primary btn-sm"}
+    = link_to "Cancel", reservations_path, {class:  "btn btn-danger btn-sm"}
+    = f.submit "Save", {class: "btn btn-primary btn-sm"}
 
 
