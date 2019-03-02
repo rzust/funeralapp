@@ -38,7 +38,6 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: funeralapp_production
-  username: funeralapp
-  password: <%= ENV['FUNERALAPP_DATABASE_PASSWORD'] %>
+  encoding: unicode
+  pool: 5
+

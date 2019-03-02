@@ -48,7 +48,8 @@ gem 'devise'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
+# Use Sidekiq for background jobs
+gem 'sidekiq'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -1,0 +1,7 @@
+%p= "Hello #{@name}!"
+%p You have the following reservations for tomorrow:
+%ul
+  - @reservations.each do |reservation|
+    %li= "From #{reservation.start_at.strftime('%H:00')} to #{reservation.end_at.strftime('%H:00')}"
+
+
