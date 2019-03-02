@@ -1,21 +1,36 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "customers/shared/links"
+.container.jumbotron
+  .row
+    .col-md-8.col-sm-12
+      %h1.display-1 Welcome to PetFuneral
+      %h2 Just one step to sign up!
+      = image_tag "burial.png", class: "w-50 mx-auto d-block"
+
+    .col-md-4.col-sm-12
+      %h2 Sign up
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .form-group
+          = f.label :first_name
+          = f.text_field :first_name, autofocus: true, autocomplete: "first_name", required: true, class: "form-control"
+        .form-group
+          = f.label :last_name
+          = f.text_field :last_name, autocomplete: "last_name", required: true, class: "form-control"
+        .form-group
+          = f.label :email
+          = f.email_field :email, autocomplete: "email", required: true, class: "form-control"
+        .form-group
+          = f.label :password
+          = f.password_field :password, autocomplete: "new-password", require: true, class: "form-control"
+          - if @minimum_password_length
+            %small
+              (#{@minimum_password_length} characters minimum)
+        .form-group
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, autocomplete: "new-password", require: true, class: "form-control"
+        .actions
+          = f.submit "Sign up", class: "btn btn-primary"
+      %hr
+      = render "customers/shared/links"
+
+
+
