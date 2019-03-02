@@ -1,10 +1,10 @@
 class Reservation < ApplicationRecord
 
-  validates :starting_time, presence: true, uniqueness: true
+  validates :start_at, presence: true, uniqueness: true
   belongs_to :customer
 
   def start_time
-    self.starting_time
+    self.start_at
   end
 
 end

@@ -12,8 +12,8 @@
     - (8..20).step(2) do |slot|
       - unless @taken_slots.include?(slot)
         .form-check
-          = f.radio_button :starting_time, @selected_day.change({ hour: slot, min: 0, sec: 0 }), required: true
-          = f.label :starting_time, "#{slot}:00", value: @selected_day.change({ hour: slot, min: 0, sec: 0 })
+          = f.radio_button :start_at, @selected_day.change({ hour: slot, min: 0, sec: 0 }), required: true
+          = f.label :start_at, "#{slot}:00", value: @selected_day.change({ hour: slot, min: 0, sec: 0 })
 
     = link_to "Cancel", reservations_path, {class:  "btn btn-danger btn-sm"}
     = f.submit "Save", {class: "btn btn-primary btn-sm"}

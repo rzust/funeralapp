@@ -13,7 +13,7 @@
         %span.badge.badge-success
           = "Your reservation is from"
           %br
-            = "#{x.start_time.strftime('%H:00')} to #{x.end_time.strftime('%H:00')}"
+            = "#{x.start_at.strftime('%H:00')} to #{x.end_at.strftime('%H:00')}"
 
     - if date > DateTime.now && reservations.count < 7
       %small= "This day has #{7 - reservations.count} slots available!"
