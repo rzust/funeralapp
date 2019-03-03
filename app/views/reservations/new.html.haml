@@ -1,6 +1,6 @@
-
 .container.jumbotron
   %h1= "New Reservation for #{@selected_day.strftime("%d of %b, %Y")}"
+
   - unless five_day_forecast.dig(@selected_day.to_i, :temp).blank?
     %span.badge.badge-primary
       Forecast for this day:
@@ -9,11 +9,18 @@
 
   = form_for(Reservation.new) do |f|
     %h3 Available Slots
+
     - (8..20).step(2) do |slot|
       - unless @taken_slots.include?(slot)
         .form-check
           = f.radio_button :start_at, @selected_day.change({ hour: slot, min: 0, sec: 0 }), required: true
           = f.label :start_at, "#{slot}:00", value: @selected_day.change({ hour: slot, min: 0, sec: 0 })
+    - if @taken_slots.size < 7
+      .form-group.col-md-6
+        = f.label :name, "Pet Name (Optional)"
+        = f.text_field :name, autofocus: true, autocomplete: "first_name", class: "form-control"
+    - else
+      %small All slots have been taken for this day
 
     = link_to "Cancel", reservations_path, {class:  "btn btn-danger btn-sm"}
     = f.submit "Save", {class: "btn btn-primary btn-sm"}

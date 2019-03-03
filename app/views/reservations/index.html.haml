@@ -2,18 +2,21 @@
 
 = month_calendar events: @reservations do |date, reservations|
   %span.badge.badge-secondary= date.day
+
   - unless five_day_forecast.dig(date.to_datetime.to_i, :temp).blank?
     %span.badge.badge-primary
       = five_day_forecast.dig(date.to_datetime.to_i, :weather)
       = "~#{five_day_forecast.dig(date.to_datetime.to_i, :temp)}C°"
 
   .text-center
-    - reservations.each do |x|
-      - if current_customer == x.customer
+    - reservations.each do |r|
+      - if current_customer == r.customer
         %span.badge.badge-success
           = "Your reservation is from"
           %br
-            = "#{x.start_at.strftime('%H:00')} to #{x.end_at.strftime('%H:00')}"
+          = "#{r.start_at.strftime('%H:00')} to #{r.end_at.strftime('%H:00')}"
+      - else
+        %span.badge.badge-warning= "Taken from #{r.start_at.strftime('%H:00')} to #{r.end_at.strftime('%H:00')}"
 
     - if date > DateTime.now && reservations.count < 7
       %small= "This day has #{7 - reservations.count} slots available!"

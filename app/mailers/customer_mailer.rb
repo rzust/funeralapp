@@ -1,5 +1,4 @@
 class CustomerMailer < ApplicationMailer
-
   def reminder_email(customer, reservations)
     @name = customer.to_s
     @reservations = reservations
